@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sergiorosa.crudcatalog.DTO.CategoryDTO;
 import com.sergiorosa.crudcatalog.entities.Category;
 import com.sergiorosa.crudcatalog.repositories.CategoryRepository;
+import com.sergiorosa.crudcatalog.services.exceptions.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -21,14 +22,13 @@ public class CategoryService {
 	@Transactional(readOnly = true)
 	public List<CategoryDTO> findAll(){
 		List<Category> list = repository.findAll();
-		//Lambda expression
 		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
-		Category entity = obj.get();
+		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		return new CategoryDTO(entity);
 	}
 }
