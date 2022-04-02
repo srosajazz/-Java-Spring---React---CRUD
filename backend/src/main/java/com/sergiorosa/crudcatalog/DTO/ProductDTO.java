@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.enscatalog.ensapp.entities.Category;
-import com.enscatalog.ensapp.entities.Product;
+import com.sergiorosa.crudcatalog.entities.Category;
+import com.sergiorosa.crudcatalog.entities.Product;
 
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
